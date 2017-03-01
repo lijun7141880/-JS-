@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>深入扩展-原型链模式(常用的六种继承方式)</title>
+</head>
+<body>
+<script type="text/javascript">
+    //->Object.create(proObj) 创建一个新的对象，但是还要把proObj作为这个对象的原型 在IE6~8不兼容（ECMAScript5）
+
+    var obj = {
+        getX: function () {
+
+        }
+    };
+    function object(o) {
+        function Fn() {
+
+        }
+
+        Fn.prototype = o;
+        return new Fn;
+    }
+    var newObj = object(obj);
+
+    function Sum(){
+
+    }
+    Sum.prototype=object(obj);
+    Sum.prototype.constructor=Sum;
+
+    //    var obj = {
+    //        getX: function () {
+    //
+    //        }
+    //    };
+    //    var obj2 = Object.create(obj);
+    //    //->obj2
+    //    //__proto__:
+    //    // getX:function...
+    //    //__proto__:Object.prototype
+    //
+    //    obj2.getX();
+    //
+    //    obj.getY = function () {
+    //        console.log(2);
+    //    };
+    //
+    //    obj2.getY();
+
+    //    var obj = {
+    //        constructor: Fn,
+    //        getX: function () {
+    //
+    //        }
+    //    };//->obj=xxxfff000
+    //
+    //    var obj2 = {};
+    //    for (var key in obj) {
+    //        if (obj.hasOwnProperty(key)) {
+    //            obj2[key] = obj[key];
+    //        }
+    //    }
+    //
+    //    function Fn() {
+    //
+    //    }
+    //    Fn.prototype = obj;//->Fn.prototype=xxxfff000
+    ////    Fn.prototype.sum = function () {
+    ////
+    ////    };
+    //    var f = new Fn;
+
+
+</script>
+</body>
+</html>

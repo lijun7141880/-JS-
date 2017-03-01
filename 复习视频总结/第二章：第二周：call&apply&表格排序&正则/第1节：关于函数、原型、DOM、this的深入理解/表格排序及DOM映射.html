@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>表格排序及DOM映射</title>
+    <style>
+        #ul1 {
+            width: 300px;
+            height: 200px;
+            margin: 10px auto;
+        }
+
+        #ul1 li {
+            border-bottom: 1px dashed #000;
+            line-height: 20px;
+        }
+    </style>
+</head>
+<body>
+<ul id="ul1">
+    <li>98</li>
+    <li>99</li>
+    <li>96</li>
+    <li>95</li>
+    <li>90</li>
+</ul>
+<script type="text/javascript" src="js/utils.js"></script>
+<script type="text/javascript">
+    var oUl = document.getElementById('ul1');
+    var oLis = oUl.getElementsByTagName('li');
+
+    //1、先把元素集合类数组转化为数组
+    var ary = utils.listToArray(oLis);
+
+    //2、给数组进行排序
+    ary.sort(function (a, b) {
+        return parseFloat(a.innerHTML) - parseFloat(b.innerHTML);
+    });
+
+    //3、按照ary中存储的最新顺序依次的把对应的li添加到页面当中
+    var frg = document.createDocumentFragment();
+    for (var i = 0; i < ary.length; i++) {
+        frg.appendChild(ary[i]);
+    }
+    oUl.appendChild(frg);
+    frg = null;
+
+
+</script>
+</body>
+</html>
